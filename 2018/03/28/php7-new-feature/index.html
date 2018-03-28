@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="主要新特性标量类型声明（string int float boolean），有强制和严格两个模式返回值类型声明： function xxx(): array{ xxx; }??操作符，简化?:三元操作符太空船操作符&amp;lt;=&amp;gt;$a 大于、等于、小于$b时返回： 1  0  -1 define定义常量数组define(&amp;apos;ABC&amp;apos;, [1,2,3]);  echo ABC[1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="php7 new feature">
+<meta property="og:url" content="https://wolfy12345.github.io/2018/03/28/php7-new-feature/index.html">
+<meta property="og:site_name" content="WoodKnot">
+<meta property="og:description" content="主要新特性标量类型声明（string int float boolean），有强制和严格两个模式返回值类型声明： function xxx(): array{ xxx; }??操作符，简化?:三元操作符太空船操作符&amp;lt;=&amp;gt;$a 大于、等于、小于$b时返回： 1  0  -1 define定义常量数组define(&amp;apos;ABC&amp;apos;, [1,2,3]);  echo ABC[1">
+<meta property="og:updated_time" content="2018-03-28T04:36:31.096Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="php7 new feature">
+<meta name="twitter:description" content="主要新特性标量类型声明（string int float boolean），有强制和严格两个模式返回值类型声明： function xxx(): array{ xxx; }??操作符，简化?:三元操作符太空船操作符&amp;lt;=&amp;gt;$a 大于、等于、小于$b时返回： 1  0  -1 define定义常量数组define(&amp;apos;ABC&amp;apos;, [1,2,3]);  echo ABC[1">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>php7 new feature</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+    <!-- jquery -->
+    <script src="/lib/jquery/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="banner">
+<div id="blogtitel" class="blogtitel">WoodKnot</div>
+<ul id="wrapper" class="wrapper">
+  <div class="sun">
+    <div class="star"></div>
+  </div>
+  <div class="mercury">
+    <div class="planet">
+      <div class="shadow"></div>
+    </div>
+  </div>
+  <div class="venus">
+    <div class="planet">
+      <div class="shadow"></div>
+    </div>
+  </div>
+  <div class="earth">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="mars">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="jupiter">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+</ul>
+</div>
+
+    <div class="background">
+      
+        <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/tzvetkov75">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2018/03/28/分布式/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://wolfy12345.github.io/2018/03/28/php7-new-feature/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://wolfy12345.github.io/2018/03/28/php7-new-feature/&text=php7 new feature"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://wolfy12345.github.io/2018/03/28/php7-new-feature/&title=php7 new feature"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://wolfy12345.github.io/2018/03/28/php7-new-feature/&is_video=false&description=php7 new feature"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=php7 new feature&body=Check out this article: https://wolfy12345.github.io/2018/03/28/php7-new-feature/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://wolfy12345.github.io/2018/03/28/php7-new-feature/&title=php7 new feature"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://wolfy12345.github.io/2018/03/28/php7-new-feature/&title=php7 new feature"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://wolfy12345.github.io/2018/03/28/php7-new-feature/&title=php7 new feature"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://wolfy12345.github.io/2018/03/28/php7-new-feature/&title=php7 new feature"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://wolfy12345.github.io/2018/03/28/php7-new-feature/&name=php7 new feature&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#主要新特性"><span class="toc-number">1.</span> <span class="toc-text">主要新特性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#标量类型声明（string-int-float-boolean），有强制和严格两个模式"><span class="toc-number">1.1.</span> <span class="toc-text">标量类型声明（string int float boolean），有强制和严格两个模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#返回值类型声明：-function-xxx-array-xxx"><span class="toc-number">1.2.</span> <span class="toc-text">返回值类型声明： function xxx(): array{ xxx; }</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作符，简化-三元操作符"><span class="toc-number">1.3.</span> <span class="toc-text">??操作符，简化?:三元操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#太空船操作符-lt-gt"><span class="toc-number">1.4.</span> <span class="toc-text">太空船操作符<=></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#define定义常量数组"><span class="toc-number">1.5.</span> <span class="toc-text">define定义常量数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#匿名类：使用new-class"><span class="toc-number">1.6.</span> <span class="toc-text">匿名类：使用new class</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#闭包：call（暂时没明白咋回事）"><span class="toc-number">1.7.</span> <span class="toc-text">闭包：call（暂时没明白咋回事）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#生成器：-使用return返回一个表达式；-yield-from-xxx-xxx代表另一个生成器"><span class="toc-number">1.8.</span> <span class="toc-text">生成器： 使用return返回一个表达式；  yield from xxx(xxx代表另一个生成器)</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+      
+      <div class="content index width mx-auto px2 my4">
+          
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        php7 new feature
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">WoodKnot</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-03-28T04:09:37.000Z" itemprop="datePublished">2018-03-28</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="主要新特性"><a href="#主要新特性" class="headerlink" title="主要新特性"></a>主要新特性</h1><h2 id="标量类型声明（string-int-float-boolean），有强制和严格两个模式"><a href="#标量类型声明（string-int-float-boolean），有强制和严格两个模式" class="headerlink" title="标量类型声明（string int float boolean），有强制和严格两个模式"></a>标量类型声明（string int float boolean），有强制和严格两个模式</h2><h2 id="返回值类型声明：-function-xxx-array-xxx"><a href="#返回值类型声明：-function-xxx-array-xxx" class="headerlink" title="返回值类型声明： function xxx(): array{ xxx; }"></a>返回值类型声明： function xxx(): array{ xxx; }</h2><h2 id="操作符，简化-三元操作符"><a href="#操作符，简化-三元操作符" class="headerlink" title="??操作符，简化?:三元操作符"></a>??操作符，简化?:三元操作符</h2><h2 id="太空船操作符-lt-gt"><a href="#太空船操作符-lt-gt" class="headerlink" title="太空船操作符&lt;=&gt;"></a>太空船操作符&lt;=&gt;</h2><pre><code>$a 大于、等于、小于$b时返回： 1  0  -1
+</code></pre><h2 id="define定义常量数组"><a href="#define定义常量数组" class="headerlink" title="define定义常量数组"></a>define定义常量数组</h2><pre><code>define(&apos;ABC&apos;, [1,2,3]);  echo ABC[1];
+</code></pre><h2 id="匿名类：使用new-class"><a href="#匿名类：使用new-class" class="headerlink" title="匿名类：使用new class"></a>匿名类：使用new class</h2><pre><code>$app = new Application;
+$app-&gt;setLogger(new class implements Logger {
+    public function log(string $msg) {
+        echo $msg;
+    }
+});
+</code></pre><h2 id="闭包：call（暂时没明白咋回事）"><a href="#闭包：call（暂时没明白咋回事）" class="headerlink" title="闭包：call（暂时没明白咋回事）"></a>闭包：call（暂时没明白咋回事）</h2><h2 id="生成器：-使用return返回一个表达式；-yield-from-xxx-xxx代表另一个生成器"><a href="#生成器：-使用return返回一个表达式；-yield-from-xxx-xxx代表另一个生成器" class="headerlink" title="生成器： 使用return返回一个表达式；  yield from xxx(xxx代表另一个生成器)"></a>生成器： 使用return返回一个表达式；  yield from xxx(xxx代表另一个生成器)</h2>
+  </div>
+</article>
+
+
+
+      </div>
+      
+       <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/tzvetkov75">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#主要新特性"><span class="toc-number">1.</span> <span class="toc-text">主要新特性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#标量类型声明（string-int-float-boolean），有强制和严格两个模式"><span class="toc-number">1.1.</span> <span class="toc-text">标量类型声明（string int float boolean），有强制和严格两个模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#返回值类型声明：-function-xxx-array-xxx"><span class="toc-number">1.2.</span> <span class="toc-text">返回值类型声明： function xxx(): array{ xxx; }</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作符，简化-三元操作符"><span class="toc-number">1.3.</span> <span class="toc-text">??操作符，简化?:三元操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#太空船操作符-lt-gt"><span class="toc-number">1.4.</span> <span class="toc-text">太空船操作符<=></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#define定义常量数组"><span class="toc-number">1.5.</span> <span class="toc-text">define定义常量数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#匿名类：使用new-class"><span class="toc-number">1.6.</span> <span class="toc-text">匿名类：使用new class</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#闭包：call（暂时没明白咋回事）"><span class="toc-number">1.7.</span> <span class="toc-text">闭包：call（暂时没明白咋回事）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#生成器：-使用return返回一个表达式；-yield-from-xxx-xxx代表另一个生成器"><span class="toc-number">1.8.</span> <span class="toc-text">生成器： 使用return返回一个表达式；  yield from xxx(xxx代表另一个生成器)</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://wolfy12345.github.io/2018/03/28/php7-new-feature/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://wolfy12345.github.io/2018/03/28/php7-new-feature/&text=php7 new feature"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://wolfy12345.github.io/2018/03/28/php7-new-feature/&title=php7 new feature"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://wolfy12345.github.io/2018/03/28/php7-new-feature/&is_video=false&description=php7 new feature"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=php7 new feature&body=Check out this article: https://wolfy12345.github.io/2018/03/28/php7-new-feature/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://wolfy12345.github.io/2018/03/28/php7-new-feature/&title=php7 new feature"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://wolfy12345.github.io/2018/03/28/php7-new-feature/&title=php7 new feature"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://wolfy12345.github.io/2018/03/28/php7-new-feature/&title=php7 new feature"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://wolfy12345.github.io/2018/03/28/php7-new-feature/&title=php7 new feature"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://wolfy12345.github.io/2018/03/28/php7-new-feature/&name=php7 new feature&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+      
+      <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Wood Knot
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/tzvetkov75">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+      <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+
+    </div>
+</body>
+</html>
