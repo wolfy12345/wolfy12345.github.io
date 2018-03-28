@@ -5,15 +5,16 @@
   
   <title>WoodKnot</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="I am a WoodKnot">
-<meta property="og:type" content="website">
+  <meta name="description" content="事务ACID原子性一致性隔离性（隔离级别）1. Read uncommited 2. Read commited（解决脏读，写数据锁行） 3. Repeateable read（解决不可重复读，写数据锁表） 4. Serializable（解决幻读，读写都锁表） 持久性分布式系统问题分布式系统中，数据通常在多个物理节点中保存了多个副本，如何保证这些节点间数 的一致性 原则1. CAP理论：（强）一">
+<meta property="og:type" content="article">
 <meta property="og:title" content="WoodKnot">
-<meta property="og:url" content="https://wolfy12345.github.io/index.html">
+<meta property="og:url" content="https://wolfy12345.github.io/2018/03/28/分布式/index.html">
 <meta property="og:site_name" content="WoodKnot">
-<meta property="og:description" content="I am a WoodKnot">
+<meta property="og:description" content="事务ACID原子性一致性隔离性（隔离级别）1. Read uncommited 2. Read commited（解决脏读，写数据锁行） 3. Repeateable read（解决不可重复读，写数据锁表） 4. Serializable（解决幻读，读写都锁表） 持久性分布式系统问题分布式系统中，数据通常在多个物理节点中保存了多个副本，如何保证这些节点间数 的一致性 原则1. CAP理论：（强）一">
+<meta property="og:updated_time" content="2018-03-28T01:47:46.820Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WoodKnot">
-<meta name="twitter:description" content="I am a WoodKnot">
+<meta name="twitter:description" content="事务ACID原子性一致性隔离性（隔离级别）1. Read uncommited 2. Read commited（解决脏读，写数据锁行） 3. Repeateable read（解决不可重复读，写数据锁表） 4. Serializable（解决幻读，读写都锁表） 持久性分布式系统问题分布式系统中，数据通常在多个物理节点中保存了多个副本，如何保证这些节点间数 的一致性 原则1. CAP理论：（强）一">
   
     <link rel="alternate" href="/atom.xml" title="WoodKnot" type="application/atom+xml">
   
@@ -150,9 +151,7 @@
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
               <div class="post-area">
-                    
-  
-    <article id="post-分布式" class="blog-post">
+                    <article id="post-分布式" class="blog-post">
     
     
 
@@ -191,84 +190,27 @@
 
 
     
-
-</article>
-
-
-
-  
-    <article id="post-hello-world" class="blog-post">
     
-    
-
-                
+<nav class="blog-pagination">
+    <div>
   
-    <h1 itemprop="name" class="large-title blog-post__heading u-mt-0">
-      <a class="" href="/2017/05/17/hello-world/">Hello World</a>
-    </h1>
+    </div>
+      
+    <div>
+      <a class="btn btn-default blog-pagination__btn blog-pagination__btn--next" rel="next" href="/2017/05/17/hello-world/">
+          <span class="blog-pagination__btn-label">Hello World</span>
+          <i class="ti-arrow-right"></i>
+      </a>
+    </div>
   
 
+</nav>
 
-
-        <span  class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_custom_widget" style="" data-hs-cos-general-type="widget" data-hs-cos-type="custom_widget">
-            <div class="blog-post__metadata">
-               <img src="/img/avatar.jpg" class="blog-post__metadata__author-img">
-             <div>
-                 
-                 Wood Knot
-                 
-              <div class="blog-post__metadata__post-info">
-                   <div class="blog-post__metadata__read-time">
-                         <a href="/2017/05/17/hello-world/" class="article-date">
-  <time datetime="2017-05-17T00:55:32.964Z" itemprop="datePublished">2017-05-17</time>
-</a> |
-                   </div>
-                    <div class="blog-post__metadata__topics">
-                         
-                    </div>
-              </div>
-            </div>
-        </div>
-        </span>
-        <div class="blog-post__resource">
-        
-               
-                    <a href="/2017/05/17/hello-world/" target="_blank">
-                        <div class="blog-post__image-container" style="background-image: url(/img/demo.jpeg)">
-                            <div class="blog-post__image-overlay">
-                            </div>
-                        </div>
-                    </a>
-
-                    
-            
-        </div>
-        
-
-        
-            <div class="blog-post__content">
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-            </div>
-        
 
 
     
 
 </article>
-
-
-
-  
-
 
 
 
