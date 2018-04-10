@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="搜索二叉树特点综合了数组和链表的优点，查找、插入和删除都很容易。 左子节点的值一定小于当前节点的值，右一定大于。 缺点当插入的数据是有序数据时，树就变成了非平衡二叉树，此时的树就变成了链表，效率急剧下降，为了解决此问题，设计出了红黑树 基础操作insert、find、delete 广度优先遍历 深度优先遍历     先序：父、左、右     中序：左、父、右     后序：左、右、父 代码实现12">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构-二叉搜索树">
+<meta property="og:url" content="https://wolfy12345.github.io/2018/04/10/数据结构-二叉搜索树/index.html">
+<meta property="og:site_name" content="WoodKnot">
+<meta property="og:description" content="搜索二叉树特点综合了数组和链表的优点，查找、插入和删除都很容易。 左子节点的值一定小于当前节点的值，右一定大于。 缺点当插入的数据是有序数据时，树就变成了非平衡二叉树，此时的树就变成了链表，效率急剧下降，为了解决此问题，设计出了红黑树 基础操作insert、find、delete 广度优先遍历 深度优先遍历     先序：父、左、右     中序：左、父、右     后序：左、右、父 代码实现12">
+<meta property="og:updated_time" content="2018-04-10T08:31:03.944Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构-二叉搜索树">
+<meta name="twitter:description" content="搜索二叉树特点综合了数组和链表的优点，查找、插入和删除都很容易。 左子节点的值一定小于当前节点的值，右一定大于。 缺点当插入的数据是有序数据时，树就变成了非平衡二叉树，此时的树就变成了链表，效率急剧下降，为了解决此问题，设计出了红黑树 基础操作insert、find、delete 广度优先遍历 深度优先遍历     先序：父、左、右     中序：左、父、右     后序：左、右、父 代码实现12">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>数据结构-二叉搜索树</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+    <!-- jquery -->
+    <script src="/lib/jquery/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="banner">
+<div id="blogtitel" class="blogtitel">WoodKnot</div>
+<ul id="wrapper" class="wrapper">
+  <div class="sun">
+    <div class="star"></div>
+  </div>
+  <div class="mercury">
+    <div class="planet">
+      <div class="shadow"></div>
+    </div>
+  </div>
+  <div class="venus">
+    <div class="planet">
+      <div class="shadow"></div>
+    </div>
+  </div>
+  <div class="earth">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="mars">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="jupiter">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+</ul>
+</div>
+
+    <div class="background">
+      
+        <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/tzvetkov75">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2018/04/10/数据结构-栈/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://wolfy12345.github.io/2018/04/10/数据结构-二叉搜索树/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://wolfy12345.github.io/2018/04/10/数据结构-二叉搜索树/&text=数据结构-二叉搜索树"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://wolfy12345.github.io/2018/04/10/数据结构-二叉搜索树/&title=数据结构-二叉搜索树"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://wolfy12345.github.io/2018/04/10/数据结构-二叉搜索树/&is_video=false&description=数据结构-二叉搜索树"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=数据结构-二叉搜索树&body=Check out this article: https://wolfy12345.github.io/2018/04/10/数据结构-二叉搜索树/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://wolfy12345.github.io/2018/04/10/数据结构-二叉搜索树/&title=数据结构-二叉搜索树"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://wolfy12345.github.io/2018/04/10/数据结构-二叉搜索树/&title=数据结构-二叉搜索树"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://wolfy12345.github.io/2018/04/10/数据结构-二叉搜索树/&title=数据结构-二叉搜索树"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://wolfy12345.github.io/2018/04/10/数据结构-二叉搜索树/&title=数据结构-二叉搜索树"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://wolfy12345.github.io/2018/04/10/数据结构-二叉搜索树/&name=数据结构-二叉搜索树&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#搜索二叉树"><span class="toc-number">1.</span> <span class="toc-text">搜索二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#特点"><span class="toc-number">1.1.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#缺点"><span class="toc-number">1.2.</span> <span class="toc-text">缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基础操作"><span class="toc-number">1.3.</span> <span class="toc-text">基础操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码实现"><span class="toc-number">1.4.</span> <span class="toc-text">代码实现</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+      
+      <div class="content index width mx-auto px2 my4">
+          
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        数据结构-二叉搜索树
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">WoodKnot</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-04-10T08:11:56.000Z" itemprop="datePublished">2018-04-10</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="搜索二叉树"><a href="#搜索二叉树" class="headerlink" title="搜索二叉树"></a>搜索二叉树</h1><h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><pre><code>综合了数组和链表的优点，查找、插入和删除都很容易。
+左子节点的值一定小于当前节点的值，右一定大于。
+</code></pre><h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><pre><code>当插入的数据是有序数据时，树就变成了非平衡二叉树，此时的树就变成了链表，效率急剧下降，为了解决此问题，设计出了红黑树
+</code></pre><h2 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h2><pre><code>insert、find、delete
+广度优先遍历
+深度优先遍历
+    先序：父、左、右
+    中序：左、父、右
+    后序：左、右、父
+</code></pre><h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div></pre></td><td class="code"><pre><div class="line">package me.woodknot;</div><div class="line"></div><div class="line">class TreeNode &#123;</div><div class="line">	public int data;</div><div class="line">	public TreeNode left;</div><div class="line">	public TreeNode right;</div><div class="line">	</div><div class="line">	public TreeNode(int value) &#123;</div><div class="line">		this.data = value;</div><div class="line">		this.left = null;</div><div class="line">		this.right = null;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class BinaryTree &#123;</div><div class="line">	</div><div class="line">	private TreeNode root;</div><div class="line">	</div><div class="line">	public void insert(int value) &#123;</div><div class="line">		TreeNode tn = new TreeNode(value);</div><div class="line">		</div><div class="line">		if(root == null) &#123;</div><div class="line">			root = tn;</div><div class="line">			return;</div><div class="line">		&#125; else &#123;</div><div class="line">			_doInsert(root, tn);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	private void _doInsert(TreeNode node, TreeNode tn) &#123;</div><div class="line">		if(node.data &gt; tn.data) &#123;</div><div class="line">			if(node.left == null) &#123;</div><div class="line">				node.left = tn;</div><div class="line">			&#125; else &#123;</div><div class="line">				_doInsert(node.left, tn);</div><div class="line">			&#125;</div><div class="line">		&#125; else &#123;</div><div class="line">			if(node.right == null) &#123;</div><div class="line">				node.right = tn;</div><div class="line">			&#125; else &#123;</div><div class="line">				_doInsert(node.right, tn);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public TreeNode find(int value) &#123;</div><div class="line">		TreeNode current = root;</div><div class="line">		while(current.data != value) &#123;</div><div class="line">			if(current.data &lt; value) &#123;</div><div class="line">				current = current.right;</div><div class="line">			&#125; else &#123;</div><div class="line">				current = current.left;</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">			if(current == null) &#123;</div><div class="line">				return null;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		return current;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public void preOrder(TreeNode node) &#123;</div><div class="line">		System.out.println(node.data);</div><div class="line">		</div><div class="line">		if(node.left != null) &#123;</div><div class="line">			preOrder(node.left);</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		if(node.right != null) &#123;</div><div class="line">			preOrder(node.right);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public void midOrder(TreeNode node) &#123;</div><div class="line">		if(node.left != null) &#123;</div><div class="line">			midOrder(node.left);</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		System.out.println(node.data);</div><div class="line">		</div><div class="line">		if(node.right != null) &#123;</div><div class="line">			midOrder(node.right);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public void sufOrder(TreeNode node) &#123;</div><div class="line">		if(node.left != null) &#123;</div><div class="line">			sufOrder(node.left);</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		if(node.right != null) &#123;</div><div class="line">			sufOrder(node.right);</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		System.out.println(node.data);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	//借助队列实现</div><div class="line">	public void bfs() &#123;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public TreeNode delete(int value) &#123;</div><div class="line">		return _doDelete(root, value);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	private TreeNode _doDelete(TreeNode node, int value) &#123;</div><div class="line">		if(node == null) &#123;</div><div class="line">			return null;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		if(value &lt; node.data) &#123;</div><div class="line">			node.left = _doDelete(node.left, value);</div><div class="line">			return node;</div><div class="line">		&#125; else if (value &gt; node.data) &#123;</div><div class="line">			node.right = _doDelete(node.right, value);</div><div class="line">			return node;</div><div class="line">		&#125; else &#123;</div><div class="line">			if(node.left == null &amp;&amp; node.right == null) &#123;</div><div class="line">				node = null;</div><div class="line">				return node;</div><div class="line">			&#125; </div><div class="line">			if (node.left == null) &#123;</div><div class="line">				node = node.right;</div><div class="line">				return node;</div><div class="line">			&#125; else if(node.right == null) &#123;</div><div class="line">				node = node.left;</div><div class="line">				return node;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		return node;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		BinaryTree bt = new BinaryTree();</div><div class="line">		bt.insert(10);</div><div class="line">		bt.insert(12);</div><div class="line">		bt.insert(20);</div><div class="line">		bt.insert(5);</div><div class="line">		</div><div class="line">//		bt.midOrder(bt.root);</div><div class="line">		TreeNode d = bt.delete(6);</div><div class="line">		System.out.println(d.data);</div><div class="line">//		bt.midOrder(bt.root);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+  </div>
+</article>
+
+
+
+      </div>
+      
+       <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/tzvetkov75">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#搜索二叉树"><span class="toc-number">1.</span> <span class="toc-text">搜索二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#特点"><span class="toc-number">1.1.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#缺点"><span class="toc-number">1.2.</span> <span class="toc-text">缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基础操作"><span class="toc-number">1.3.</span> <span class="toc-text">基础操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码实现"><span class="toc-number">1.4.</span> <span class="toc-text">代码实现</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://wolfy12345.github.io/2018/04/10/数据结构-二叉搜索树/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://wolfy12345.github.io/2018/04/10/数据结构-二叉搜索树/&text=数据结构-二叉搜索树"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://wolfy12345.github.io/2018/04/10/数据结构-二叉搜索树/&title=数据结构-二叉搜索树"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://wolfy12345.github.io/2018/04/10/数据结构-二叉搜索树/&is_video=false&description=数据结构-二叉搜索树"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=数据结构-二叉搜索树&body=Check out this article: https://wolfy12345.github.io/2018/04/10/数据结构-二叉搜索树/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://wolfy12345.github.io/2018/04/10/数据结构-二叉搜索树/&title=数据结构-二叉搜索树"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://wolfy12345.github.io/2018/04/10/数据结构-二叉搜索树/&title=数据结构-二叉搜索树"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://wolfy12345.github.io/2018/04/10/数据结构-二叉搜索树/&title=数据结构-二叉搜索树"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://wolfy12345.github.io/2018/04/10/数据结构-二叉搜索树/&title=数据结构-二叉搜索树"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://wolfy12345.github.io/2018/04/10/数据结构-二叉搜索树/&name=数据结构-二叉搜索树&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+      
+      <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Wood Knot
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/tzvetkov75">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+      <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+
+    </div>
+</body>
+</html>
