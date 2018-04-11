@@ -132,9 +132,9 @@
   <article id="post">
     <h1>数据结构-链表</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">撰写于 2018-04-10</span>
+      <span id = "post-title-date">Created at 2018-04-10</span>
       
-        <span id = "post-title-updated">修改于 2018-04-10</span>
+        <span id = "post-title-updated">Updated at 2018-04-10</span>
       
       
       
@@ -146,10 +146,10 @@
 </code></pre><h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line">	package me.woodknot;</div><div class="line">	</div><div class="line">	class Node &#123;</div><div class="line">		public int data;</div><div class="line">		public Node next;</div><div class="line">		</div><div class="line">		public Node() &#123;</div><div class="line">			</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public class Link &#123;</div><div class="line">	</div><div class="line">		public Node head;</div><div class="line">		public int length;</div><div class="line">		</div><div class="line">		public Link() &#123;</div><div class="line">			head = new Node();</div><div class="line">			head.data = 0;</div><div class="line">			head.next = null;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		public Link(int data) &#123;</div><div class="line">			head = new Node();</div><div class="line">			head.data = data;</div><div class="line">			head.next = null;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		public void addFromHead(int data) &#123;</div><div class="line">			Node add = new Node();</div><div class="line">			add.data = data;</div><div class="line">			add.next = head;</div><div class="line">			head = add;</div><div class="line">			this.length ++;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		public void delFromHead() &#123;</div><div class="line">			Node tmp = head.next;</div><div class="line">			head.next = null;</div><div class="line">			head = tmp;</div><div class="line">			this.length --;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		public int getLength() &#123;</div><div class="line">			return this.length;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		public void printList() &#123;</div><div class="line">			Node tmp = head;</div><div class="line">			while(tmp != null) &#123;</div><div class="line">				System.out.println(tmp.data);</div><div class="line">				tmp = tmp.next;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		public Node findNode(int data) &#123;</div><div class="line">			Node tmp = head;</div><div class="line">			while(tmp.data != data) &#123;</div><div class="line">				if(tmp.next == null) &#123;</div><div class="line">					return null;</div><div class="line">				&#125;</div><div class="line">				tmp = tmp.next;</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">			return tmp;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		public Node delByData(int data) &#123;</div><div class="line">			Node curr = head;</div><div class="line">			Node prev = head;</div><div class="line">			while(curr.data != data) &#123;</div><div class="line">				if(curr.next == null) &#123;</div><div class="line">					return null;</div><div class="line">				&#125;</div><div class="line">				prev = curr;</div><div class="line">				curr = curr.next;</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">			if(curr == head) &#123;</div><div class="line">				head = head.next;</div><div class="line">			&#125; else &#123;</div><div class="line">				prev.next = curr.next;</div><div class="line">			&#125;</div><div class="line">			return curr;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		public static void main(String[] args) &#123;</div><div class="line">			Link l = new Link(5);</div><div class="line">			l.addFromHead(1);</div><div class="line">			l.addFromHead(2);</div><div class="line">			l.addFromHead(3);</div><div class="line">			l.addFromHead(4);</div><div class="line">			l.printList();</div><div class="line">	</div><div class="line">			Node del = l.delByData(2);</div><div class="line">			l.printList();</div><div class="line">			System.out.println(del.data);</div><div class="line">		&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
   </article>
   <div class="random-toc-area">
-  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
-  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
   <div class="random-toc">
-    <h2>目录</h2>
+    <h2>Table of Content</h2>
     <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#链表"><span class="toc-text">链表</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#特点"><span class="toc-text">特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型"><span class="toc-text">类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基础操作"><span class="toc-text">基础操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码实现"><span class="toc-text">代码实现</span></a></li></ol></li></ol>
   </div>
 </div>
@@ -157,13 +157,13 @@
   
 <nav id="pagination">
   
-    <a href="/2018/04/10/数据结构-队列/" class="prev">&larr; 上一篇 数据结构-队列</a>
+    <a href="/2018/04/10/数据结构-队列/" class="prev">&larr; Prev post 数据结构-队列</a>
   
 
   
 
   
-    <a href="/2018/03/29/php变量/" class="next">下一篇 php变量 &rarr;</a>
+    <a href="/2018/03/29/php变量/" class="next">Next post php变量 &rarr;</a>
   
 </nav>
 
@@ -193,7 +193,7 @@
 <div id="user-card">
   <div class="center-field">
     <img class="avatar" src="http://7te9fe.com1.z0.glb.clouddn.com/default_avatar.jpg">
-    <p id="description">I am a WoodKnot</p>
+    <p id="description">老铁666</p>
     <ul class="social-icon">
   
   
