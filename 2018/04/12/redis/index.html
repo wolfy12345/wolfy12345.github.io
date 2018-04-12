@@ -1,0 +1,368 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Wood Knot">
+  
+  
+  
+  
+    <meta name="description" content="Redis基本数据类型
+String
+List
+Set
+ZSet
+Hash
+
+Pub/Sub事务相关命令
+WATCH
+UNWATCH
+MULTI
+EXEC
+DISCARD使用逻辑
+执行MULTI命令，后续的所有命令都放入到一个队列中，执行EXEC，队列中的命令执行，执行DISCARD，队列清空，事务结束
+WATCH命令监视某些键之后，执行上述事务流程，如果在执行EXEC之前，有任何一个被监视...">
+  
+  <title>redis [ WoodKnot ]</title>
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+  
+    <div class="item next">
+      <a href="/2018/04/11/高级排序/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        高级排序
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://7te9fe.com1.z0.glb.clouddn.com/default_avatar.jpg"/>
+          <div id="homelink">WoodKnot</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/index.html">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/about">About</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="https://github.com/stiekel/hexo-theme-random">Github</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>redis</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2018-04-12</span>
+      
+        <span id = "post-title-updated">Updated at 2018-04-12</span>
+      
+      
+      
+    </p>
+    
+    <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2><ul>
+<li>String</li>
+<li>List</li>
+<li>Set</li>
+<li>ZSet</li>
+<li>Hash</li>
+</ul>
+<h2 id="Pub-Sub"><a href="#Pub-Sub" class="headerlink" title="Pub/Sub"></a>Pub/Sub</h2><h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h3 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h3><ul>
+<li>WATCH</li>
+<li>UNWATCH</li>
+<li>MULTI</li>
+<li>EXEC</li>
+<li>DISCARD<h3 id="使用逻辑"><a href="#使用逻辑" class="headerlink" title="使用逻辑"></a>使用逻辑</h3></li>
+<li>执行MULTI命令，后续的所有命令都放入到一个队列中，执行EXEC，队列中的命令执行，执行DISCARD，队列清空，事务结束</li>
+<li>WATCH命令监视某些键之后，执行上述事务流程，如果在执行EXEC之前，有任何一个被监视的键的内容被修改了，则整个事务取消</li>
+<li>EXEC执行成功与否，所有键上的监视都会取消</li>
+<li>UNWATCH取消监视</li>
+</ul>
+<h2 id="主从复制"><a href="#主从复制" class="headerlink" title="主从复制"></a>主从复制</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><ol>
+<li>从服务器连接时，发送SYNC命令给主服务器</li>
+<li>主服务器接到命令后，执行BGSAVE命令，然后开启一个子进程，把数据保存到磁盘中，生成.rdb文件；主进程还继续接受新的写入命令，并将新命令保存到缓冲区</li>
+<li>主服务器将.rdb文件发送给从服务器，从服务器读取内容载入到内存中</li>
+<li>之后主服务器会以 Redis 命令协议的格式， 将写命令缓冲区中积累的所有内容都发送给从服务器</li>
+<li>数据同步完成<h3 id="开启从服务器"><a href="#开启从服务器" class="headerlink" title="开启从服务器"></a>开启从服务器</h3> slaveof 主服务器ip 主服务器port</li>
+</ol>
+<h2 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h2><h3 id="RDB"><a href="#RDB" class="headerlink" title="RDB"></a>RDB</h3><h4 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h4><ul>
+<li>满足某一条件时，保存一次数据集。如save 60 1000，60秒内至少有1000个改动，则执行一次</li>
+<li>调用save或者bgsave命令，也会执行保存<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4></li>
+<li>文件紧凑；适合数据备份和灾难恢复；</li>
+<li>数据恢复速度比AOF快；</li>
+<li>只需要fork子进程，主进程可以继续处理命令；<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4></li>
+<li>有可能丢失数据，因为RDB操作并不轻松，所以一般至少5分钟才保存一次，如果宕机，这几分钟的数据就丢失了；</li>
+<li>当数据量很大时，fork出的子进程会比较耗时，有可能造成短暂的服务中断（xx毫秒-1秒）<h3 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h3><h4 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h4></li>
+<li>配置文件开启：appendonly yes</li>
+<li>调用BGREWRITEAOF进行重写，缩小文件体积</li>
+<li>可使用redis-check-aof –fix来修复损坏的AOF文件，否则无法正常启动redis<h4 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h4></li>
+<li>默认每秒执行一次fsync，这样即使宕机也只是丢失一秒的数据（fsync策略可自行配置，不执行、每秒执行、每次写入时执行）</li>
+<li>文件过大时，自动在后台进行AOF重写，缩小到最小命令集合</li>
+<li>AOF文件只追加<h4 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h4></li>
+<li>通常体积大于RDB</li>
+<li>fsync策略不同，AOF速度有可能会慢于RDB</li>
+</ul>
+<h3 id="选择策略"><a href="#选择策略" class="headerlink" title="选择策略"></a>选择策略</h3><ul>
+<li>如果想达到MySQL、pgsql的数据安全性，可同时使用两种</li>
+<li>如果可以承受几分钟内的数据丢失，则使用RDB</li>
+<li>不推荐只使用AOF，因为RDB很适合于数据恢复，且恢复速度快于AOF</li>
+</ul>
+<h2 id="哨兵Sentinel"><a href="#哨兵Sentinel" class="headerlink" title="哨兵Sentinel"></a>哨兵Sentinel</h2><h3 id="职责"><a href="#职责" class="headerlink" title="职责"></a>职责</h3><ol>
+<li>监控：主从服务器是否正常</li>
+<li>通知：服务器出问题时候，通过API通知管理员或其他应用程序</li>
+<li>自动故障转移：主观下线、客观下线、选举新主服务器、通知其他从服务器</li>
+</ol>
+<h2 id="集群Cluster"><a href="#集群Cluster" class="headerlink" title="集群Cluster"></a>集群Cluster</h2><blockquote>
+<p>Redis集群使用分片来实现数据共享，一个集群包含16384个哈希槽（slot），集群中的不同主节点，分别维护其中的一部分槽位，通过CRC16(key) % 16384计算出key属于哪个槽位，然后存入。<br>比如有三个主节点A、B、C，节点A存储0-5500槽位，B存储5501-11000，C存储11001-16384<br>通常每个主节点包含1到多个从节点，以保证整个集群的高可用，否则某个主节点下线，整个集群都会挂掉</p>
+</blockquote>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ol>
+<li>如果槽位存满了怎么办 LRU？</li>
+<li>如果出现哈希碰撞怎么处理的</li>
+</ol>
+<h2 id="未完待续……"><a href="#未完待续……" class="headerlink" title="未完待续……"></a>未完待续……</h2>
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis"><span class="toc-text">Redis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本数据类型"><span class="toc-text">基本数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pub-Sub"><span class="toc-text">Pub/Sub</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事务"><span class="toc-text">事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相关命令"><span class="toc-text">相关命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用逻辑"><span class="toc-text">使用逻辑</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主从复制"><span class="toc-text">主从复制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原理"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启从服务器"><span class="toc-text">开启从服务器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#持久化"><span class="toc-text">持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RDB"><span class="toc-text">RDB</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#原理-1"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#优点"><span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点"><span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AOF"><span class="toc-text">AOF</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#原理-2"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#优点-1"><span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点-1"><span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选择策略"><span class="toc-text">选择策略</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#哨兵Sentinel"><span class="toc-text">哨兵Sentinel</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#职责"><span class="toc-text">职责</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集群Cluster"><span class="toc-text">集群Cluster</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题"><span class="toc-text">问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#未完待续……"><span class="toc-text">未完待续……</span></a></li></ol></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+
+  
+
+  
+    <a href="/2018/04/11/高级排序/" class="next">Next post 高级排序 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Wood Knot using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://7te9fe.com1.z0.glb.clouddn.com/default_avatar.jpg">
+    <p id="description">老铁666</p>
+    <ul class="social-icon">
+  
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+
+
+
+  
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+  turnoffBackgroundImage = true;
+
+
+var backgroundColor = "34495E";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+</body>
+</html>
+
