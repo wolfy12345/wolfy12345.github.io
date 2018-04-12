@@ -28,9 +28,11 @@ WATCH
 UNWATCH
 MULTI
 EXEC
-DISCARD使用逻辑
+DISCARD
+
+使用逻辑
 执行MULTI命令，后续的所有命令都放入到一个队列中，执行EXEC，队列中的命令执行，执行DISCARD，队列清空，事务结束
-WATCH命令监视某些键之后，执行上述事务流程，如果在执行EXEC之前，有任何一个被监视...">
+WATCH命令监视某些键之后，执行上述事务流程，如果在执行EXEC之前，有任何一个被...">
   
   <title>redis [ WoodKnot ]</title>
   
@@ -154,7 +156,9 @@ WATCH命令监视某些键之后，执行上述事务流程，如果在执行EXE
 <li>UNWATCH</li>
 <li>MULTI</li>
 <li>EXEC</li>
-<li>DISCARD<h3 id="使用逻辑"><a href="#使用逻辑" class="headerlink" title="使用逻辑"></a>使用逻辑</h3></li>
+<li>DISCARD</li>
+</ul>
+<h3 id="使用逻辑"><a href="#使用逻辑" class="headerlink" title="使用逻辑"></a>使用逻辑</h3><ul>
 <li>执行MULTI命令，后续的所有命令都放入到一个队列中，执行EXEC，队列中的命令执行，执行DISCARD，队列清空，事务结束</li>
 <li>WATCH命令监视某些键之后，执行上述事务流程，如果在执行EXEC之前，有任何一个被监视的键的内容被修改了，则整个事务取消</li>
 <li>EXEC执行成功与否，所有键上的监视都会取消</li>
@@ -165,16 +169,19 @@ WATCH命令监视某些键之后，执行上述事务流程，如果在执行EXE
 <li>主服务器接到命令后，执行BGSAVE命令，然后开启一个子进程，把数据保存到磁盘中，生成.rdb文件；主进程还继续接受新的写入命令，并将新命令保存到缓冲区</li>
 <li>主服务器将.rdb文件发送给从服务器，从服务器读取内容载入到内存中</li>
 <li>之后主服务器会以 Redis 命令协议的格式， 将写命令缓冲区中积累的所有内容都发送给从服务器</li>
-<li>数据同步完成<h3 id="开启从服务器"><a href="#开启从服务器" class="headerlink" title="开启从服务器"></a>开启从服务器</h3> slaveof 主服务器ip 主服务器port</li>
+<li>数据同步完成</li>
 </ol>
-<h2 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h2><h3 id="RDB"><a href="#RDB" class="headerlink" title="RDB"></a>RDB</h3><h4 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h4><ul>
+<h3 id="开启从服务器"><a href="#开启从服务器" class="headerlink" title="开启从服务器"></a>开启从服务器</h3><pre><code>slaveof 主服务器ip 主服务器port
+</code></pre><h2 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h2><h3 id="RDB"><a href="#RDB" class="headerlink" title="RDB"></a>RDB</h3><h4 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h4><ul>
 <li>满足某一条件时，保存一次数据集。如save 60 1000，60秒内至少有1000个改动，则执行一次</li>
 <li>调用save或者bgsave命令，也会执行保存<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4></li>
 <li>文件紧凑；适合数据备份和灾难恢复；</li>
 <li>数据恢复速度比AOF快；</li>
 <li>只需要fork子进程，主进程可以继续处理命令；<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4></li>
 <li>有可能丢失数据，因为RDB操作并不轻松，所以一般至少5分钟才保存一次，如果宕机，这几分钟的数据就丢失了；</li>
-<li>当数据量很大时，fork出的子进程会比较耗时，有可能造成短暂的服务中断（xx毫秒-1秒）<h3 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h3><h4 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h4></li>
+<li>当数据量很大时，fork出的子进程会比较耗时，有可能造成短暂的服务中断（xx毫秒-1秒）</li>
+</ul>
+<h3 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h3><h4 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h4><ul>
 <li>配置文件开启：appendonly yes</li>
 <li>调用BGREWRITEAOF进行重写，缩小文件体积</li>
 <li>可使用redis-check-aof –fix来修复损坏的AOF文件，否则无法正常启动redis<h4 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h4></li>
