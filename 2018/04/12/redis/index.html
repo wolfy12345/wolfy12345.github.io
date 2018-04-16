@@ -16,23 +16,7 @@
   
   
   
-    <meta name="description" content="Redis基本数据类型
-String
-List
-Set
-ZSet
-Hash
-
-Pub/Sub事务相关命令
-WATCH
-UNWATCH
-MULTI
-EXEC
-DISCARD
-
-使用逻辑
-执行MULTI命令，后续的所有命令都放入到一个队列中，执行EXEC，队列中的命令执行，执行DISCARD，队列清空，事务结束
-WATCH命令监视某些键之后，执行上述事务流程，如果在执行EXEC之前，有任何一个被...">
+    <meta name="description" content="Redis基本数据类型123456789101112131415161718192021typedef struct redisObject &#123;        // 类型      unsigned type:4;                // 不使用(对齐位)      unsigned notused:2;        // 编码方式      unsigned enc...">
   
   <title>redis [ WoodKnot ]</title>
   
@@ -52,6 +36,15 @@ WATCH命令监视某些键之后，执行上述事务流程，如果在执行EXE
 
 <body>
 <div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="/2018/04/16/memcache/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        memcache
+      </div>
+    </div>
   
   
     <div class="item next">
@@ -138,19 +131,38 @@ WATCH命令监视某些键之后，执行上述事务流程，如果在执行EXE
     <p class="page-title-sub">
       <span id = "post-title-date">Created at 2018-04-12</span>
       
-        <span id = "post-title-updated">Updated at 2018-04-12</span>
+        <span id = "post-title-updated">Updated at 2018-04-16</span>
       
       
       
     </p>
     
-    <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2><ul>
+    <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">typedef struct redisObject &#123;  </div><div class="line">  </div><div class="line">    // 类型  </div><div class="line">    unsigned type:4;          </div><div class="line">  </div><div class="line">    // 不使用(对齐位)  </div><div class="line">    unsigned notused:2;  </div><div class="line">  </div><div class="line">    // 编码方式  </div><div class="line">    unsigned encoding:4;  </div><div class="line">  </div><div class="line">    // LRU 时间（相对于 server.lruclock）  </div><div class="line">    unsigned lru:22;  </div><div class="line">  </div><div class="line">    // 引用计数  </div><div class="line">    int refcount;  </div><div class="line">  </div><div class="line">    // 指向对象的值  </div><div class="line">    void *ptr;  </div><div class="line">  </div><div class="line">&#125; robj;</div></pre></td></tr></table></figure>
+<h3 id="5种type"><a href="#5种type" class="headerlink" title="5种type"></a>5种type</h3><ul>
 <li>String</li>
 <li>List</li>
 <li>Set</li>
 <li>ZSet</li>
 <li>Hash</li>
 </ul>
+<h3 id="8种encoding"><a href="#8种encoding" class="headerlink" title="8种encoding"></a>8种encoding</h3><ul>
+<li>REDIS_ENCODING_INT</li>
+<li>REDIS_ENCODING_EMBSTR</li>
+<li>REDIS_ENCODING_RAW</li>
+<li>REDIS_ENCODING_HT</li>
+<li>REDIS_ENCODING_LINKEDLIST</li>
+<li>REDIS_ENCODING_ZIPLIST</li>
+<li>REDIS_ENCODING_INTSET</li>
+<li>REDIS_ENCODING_SKIPLIST  </li>
+</ul>
+<p>###实现</p>
+<ol>
+<li>字符串对应的int embstr raw，字符串能转成long，就对应int；字符串长度小于39字节，用embstr，否则raw</li>
+<li>列表对应ziplist或者linkedlist</li>
+<li>哈希对应ziplist或者ht（ht由dict结构实现）</li>
+<li>集合对应iniset或者ht，iniset支持三种长度：int16 int32 int64，所以会涉及升级操作，但不支持降级</li>
+<li>有序集合对应ziplist或者skiplist+dict</li>
+</ol>
 <h2 id="Pub-Sub"><a href="#Pub-Sub" class="headerlink" title="Pub/Sub"></a>Pub/Sub</h2><h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h3 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h3><ul>
 <li>WATCH</li>
 <li>UNWATCH</li>
@@ -196,13 +208,16 @@ WATCH命令监视某些键之后，执行上述事务流程，如果在执行EXE
 <li>如果可以承受几分钟内的数据丢失，则使用RDB</li>
 <li>不推荐只使用AOF，因为RDB很适合于数据恢复，且恢复速度快于AOF</li>
 </ul>
-<h2 id="哨兵Sentinel"><a href="#哨兵Sentinel" class="headerlink" title="哨兵Sentinel"></a>哨兵Sentinel</h2><h3 id="职责"><a href="#职责" class="headerlink" title="职责"></a>职责</h3><ol>
+<h2 id="哨兵Sentinel"><a href="#哨兵Sentinel" class="headerlink" title="哨兵Sentinel"></a>哨兵Sentinel</h2><h3 id="职责（保证高可用）"><a href="#职责（保证高可用）" class="headerlink" title="职责（保证高可用）"></a>职责（保证高可用）</h3><ol>
 <li>监控：主从服务器是否正常</li>
 <li>通知：服务器出问题时候，通过API通知管理员或其他应用程序</li>
 <li>自动故障转移：主观下线、客观下线、选举新主服务器、通知其他从服务器</li>
 </ol>
 <h2 id="集群Cluster"><a href="#集群Cluster" class="headerlink" title="集群Cluster"></a>集群Cluster</h2><blockquote>
 <p>Redis集群使用分片来实现数据共享，一个集群包含16384个哈希槽（slot），集群中的不同主节点，分别维护其中的一部分槽位，通过CRC16(key) % 16384计算出key属于哪个槽位，然后存入。<br>比如有三个主节点A、B、C，节点A存储0-5500槽位，B存储5501-11000，C存储11001-16384<br>通常每个主节点包含1到多个从节点，以保证整个集群的高可用，否则某个主节点下线，整个集群都会挂掉</p>
+</blockquote>
+<h3 id="重新分片"><a href="#重新分片" class="headerlink" title="重新分片"></a>重新分片</h3><blockquote>
+<p>reshard，将现有的槽位挪出一部分到新的节点，可从某个节点挪出，也可从所有节点挪出</p>
 </blockquote>
 <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ol>
 <li>如果槽位存满了怎么办 LRU？</li>
@@ -215,12 +230,14 @@ WATCH命令监视某些键之后，执行上述事务流程，如果在执行EXE
   <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
   <div class="random-toc">
     <h2>Table of Content</h2>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis"><span class="toc-text">Redis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本数据类型"><span class="toc-text">基本数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pub-Sub"><span class="toc-text">Pub/Sub</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事务"><span class="toc-text">事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相关命令"><span class="toc-text">相关命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用逻辑"><span class="toc-text">使用逻辑</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主从复制"><span class="toc-text">主从复制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原理"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启从服务器"><span class="toc-text">开启从服务器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#持久化"><span class="toc-text">持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RDB"><span class="toc-text">RDB</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#原理-1"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#优点"><span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点"><span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AOF"><span class="toc-text">AOF</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#原理-2"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#优点-1"><span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点-1"><span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选择策略"><span class="toc-text">选择策略</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#哨兵Sentinel"><span class="toc-text">哨兵Sentinel</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#职责"><span class="toc-text">职责</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集群Cluster"><span class="toc-text">集群Cluster</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题"><span class="toc-text">问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#未完待续……"><span class="toc-text">未完待续……</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis"><span class="toc-text">Redis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本数据类型"><span class="toc-text">基本数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5种type"><span class="toc-text">5种type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8种encoding"><span class="toc-text">8种encoding</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pub-Sub"><span class="toc-text">Pub/Sub</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事务"><span class="toc-text">事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相关命令"><span class="toc-text">相关命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用逻辑"><span class="toc-text">使用逻辑</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主从复制"><span class="toc-text">主从复制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原理"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启从服务器"><span class="toc-text">开启从服务器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#持久化"><span class="toc-text">持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RDB"><span class="toc-text">RDB</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#原理-1"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#优点"><span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点"><span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AOF"><span class="toc-text">AOF</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#原理-2"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#优点-1"><span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点-1"><span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选择策略"><span class="toc-text">选择策略</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#哨兵Sentinel"><span class="toc-text">哨兵Sentinel</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#职责（保证高可用）"><span class="toc-text">职责（保证高可用）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集群Cluster"><span class="toc-text">集群Cluster</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#重新分片"><span class="toc-text">重新分片</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题"><span class="toc-text">问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#未完待续……"><span class="toc-text">未完待续……</span></a></li></ol></li></ol>
   </div>
 </div>
 
   
 <nav id="pagination">
+  
+    <a href="/2018/04/16/memcache/" class="prev">&larr; Prev post memcache</a>
   
 
   
