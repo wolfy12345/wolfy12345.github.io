@@ -1,7 +1,5 @@
 
 
-  
-
 
 
 
@@ -18,9 +16,13 @@
   
   
   
-    <meta name="description" content="老铁666">
+    <meta name="description" content="通讯流程
+Nginx接收到浏览器发来的请求，判断是否是.php
+Nginx提供了fastcgi模块来将http请求映射为fastcgi请求
+通过fastcgi_param指令将Nginx的变量转成PHP可理解的变量：fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+通过fastcgi_pass指定的监听地址（t...">
   
-  <title>Archives [ WoodKnot ]</title>
+  <title>nginx php-fpm [ WoodKnot ]</title>
   
   
     <link rel="shortcut icon" href="/favicon.ico">
@@ -39,6 +41,15 @@
 <body>
 <div class="side-navigate hide-area">
   
+  
+    <div class="item next">
+      <a href="/2018/04/16/memcache/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        memcache
+      </div>
+    </div>
   
 </div>
 <div id="outer-container" class="hide-area">
@@ -64,7 +75,7 @@
           </li>
         
           
-            <li class="active">
+            <li>
           
             <a href="/archives">Archives</a>
             
@@ -110,304 +121,67 @@
     <div id="content-inner">
       
       
-  <article>
-    
-
-  <div id="recent-posts">
-    <h1>Archives
-    
-      <span class="posts-count">
-      Total
-      10
-      
-        posts
-      
-      </span>
-    
-    </h1>
-    
-    
-      
-      
-        
-      
-      
-    
-      
-      
-      
-    
-      
-      
-      
-    
-      
-      
-      
-    
-      
-      
-      
-    
-      
-      
-      
-    
-      
-      
-      
-    
-      
-      
-      
-    
-      
-      
-      
-    
-      
-      
-      
-    
-    
-    
-      
-      
-        
-        <h3 class="archive-year-title">2018
-        
-          <span class="posts-count">
-          Total
-          10
-          
-            posts
-          
-          </span>
-        
-        </h3>
-      
-      <div class="post-title-item">
-  
-  <a href="/2018/04/17/nginx-php-fpm/">
-  
-    nginx php-fpm
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">4-17</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2018/04/16/memcache/">
-  
-    memcache
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">4-16</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2018/04/12/redis/">
-  
-    redis
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">4-12</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2018/04/11/高级排序/">
-  
-    高级排序
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">4-11</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2018/04/11/简单排序/">
-  
-    简单排序
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">4-11</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2018/04/10/记一次数据库问题排查/">
-  
-    记一次数据库问题排查
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">4-10</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2018/04/10/数据结构-哈希表/">
-  
-    数据结构-哈希表
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">4-10</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2018/04/10/数据结构-二叉搜索树/">
-  
-    数据结构-二叉搜索树
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">4-10</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2018/04/10/数据结构-栈/">
-  
-    数据结构-栈
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">4-10</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-      
-      
-      <div class="post-title-item">
-  
-  <a href="/2018/04/10/数据结构-队列/">
-  
-    数据结构-队列
-  
-  </a>
-  <p class="page-title-sub">
-    <span id = "post-title-date">4-10</span>
-    
-    
-    
-      <br>
-      
-      
-    
-  </p>
-  
-</div>
-    
-  </div>
-
+  <article id="post">
+    <h1>nginx php-fpm</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2018-04-17</span>
+      
+        <span id = "post-title-updated">Updated at 2018-04-17</span>
+      
+      
+      
+    </p>
+    
+    <h2 id="通讯流程"><a href="#通讯流程" class="headerlink" title="通讯流程"></a>通讯流程</h2><ol>
+<li>Nginx接收到浏览器发来的请求，判断是否是.php</li>
+<li>Nginx提供了fastcgi模块来将http请求映射为fastcgi请求</li>
+<li>通过fastcgi_param指令将Nginx的变量转成PHP可理解的变量：fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</li>
+<li>通过fastcgi_pass指定的监听地址（tcp socket或者Unix socket），将请求转发给PHP-FPM</li>
+<li>PHP-FPM的master进程收的请求，将请求转发给worker进程进行处理，worker进程处理完成后返回结果</li>
+<li>如果没有空余的worker进程则502，如果worker进程处理超时则504</li>
+</ol>
+<h2 id="CGI"><a href="#CGI" class="headerlink" title="CGI"></a>CGI</h2><pre><code>WebServer与后台语言（PHP/JAVA/PYTHON等）进行交互的协议，基于此协议，后台语言可以选任意选。
+</code></pre><h2 id="FastCGI"><a href="#FastCGI" class="headerlink" title="FastCGI"></a>FastCGI</h2><pre><code>由于众所周知的缺点，CGI被FastCGI代替了
+</code></pre><h2 id="FPM"><a href="#FPM" class="headerlink" title="FPM"></a>FPM</h2><pre><code>FastCGI Process Manager，它可以与任何实现了FastCGI协议的webserver进行通信
+</code></pre><h2 id="PHP-FPM"><a href="#PHP-FPM" class="headerlink" title="PHP-FPM"></a>PHP-FPM</h2><pre><code>PHP语言的进程管理器，包含master和worker两种进程。master接受webserver的请求，分配给worker，worker进程中的PHP解释器执行PHP代码
+</code></pre><h2 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h2><h3 id="fastcgi-param指令"><a href="#fastcgi-param指令" class="headerlink" title="fastcgi_param指令"></a>fastcgi_param指令</h3><ul>
+<li>Nginx的fastcgi模块将http请求映射为fastcgi请求，fastcgi_param指令将Nginx的变量转换成PHP可以理解的变量</li>
+<li>fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</li>
+<li>fastcgi_param QUERY_STRING $query_string;</li>
+<li>fastcgi_param REMOTE_ADDR $remote_addr;</li>
+<li>等等<h3 id="fastcgi-pass指令"><a href="#fastcgi-pass指令" class="headerlink" title="fastcgi_pass指令"></a>fastcgi_pass指令</h3></li>
+<li>Nginx与PHP-FPM通讯方式有两种，TCP和UNIX两种套接字。</li>
+<li>如果两者处于同一机器，建议使用UNIX，效率高</li>
+<li>如果两者处于不同的机器，则只能使用TCP</li>
+<li>fastcgi_pass unix:/var/run/php5-fpm.sock;  //UNIX</li>
+<li>fastcgi_pass 127.0.0.1:9000;  //TCP</li>
+</ul>
 
   </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#通讯流程"><span class="toc-text">通讯流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CGI"><span class="toc-text">CGI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FastCGI"><span class="toc-text">FastCGI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FPM"><span class="toc-text">FPM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PHP-FPM"><span class="toc-text">PHP-FPM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx"><span class="toc-text">Nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#fastcgi-param指令"><span class="toc-text">fastcgi_param指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fastcgi-pass指令"><span class="toc-text">fastcgi_pass指令</span></a></li></ol></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+
+  
+
+  
+    <a href="/2018/04/16/memcache/" class="next">Next post memcache &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
 
       
       
@@ -501,6 +275,8 @@ var unsplashConfig = {"gravity":"north"};
 var turnoffBackgroundImage = false;
 
 
+
+  turnoffBackgroundImage = true;
 
 
 var backgroundColor = "34495E";
