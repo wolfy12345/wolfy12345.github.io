@@ -1,211 +1,347 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
 
+
+
+
+
+
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <title>高级排序 | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="希尔排序123456789101112131415161718192021222324252627package me.woodknot;public class ShellSort &amp;#123;	public static void sort(long[] arr) &amp;#123;		int h = 1;		while (h &amp;lt; arr.length / 3) &amp;#123;			h = h">
-<meta property="og:type" content="article">
-<meta property="og:title" content="高级排序">
-<meta property="og:url" content="http://yoursite.com/2018/04/11/高级排序/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="希尔排序123456789101112131415161718192021222324252627package me.woodknot;public class ShellSort &amp;#123;	public static void sort(long[] arr) &amp;#123;		int h = 1;		while (h &amp;lt; arr.length / 3) &amp;#123;			h = h">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-11T06:05:36.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="高级排序">
-<meta name="twitter:description" content="希尔排序123456789101112131415161718192021222324252627package me.woodknot;public class ShellSort &amp;#123;	public static void sort(long[] arr) &amp;#123;		int h = 1;		while (h &amp;lt; arr.length / 3) &amp;#123;			h = h">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <meta name="author" content="Wood Knot">
   
   
-    <link rel="icon" href="/favicon.png">
   
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <meta name="description" content="希尔排序123456789101112131415161718192021222324252627package me.woodknot;public class ShellSort &#123;	public static void sort(long[] arr) &#123;		int h = 1;		while (h &lt; arr.length / 3) &#123;			h =...">
   
-  <link rel="stylesheet" href="/css/style.css">
+  <title>高级排序 [ WoodKnot ]</title>
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
 </head>
 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="/2018/04/12/redis/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        redis
+      </div>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
+  
+  
+    <div class="item next">
+      <a href="/2018/04/11/简单排序/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        简单排序
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
         
-          <a class="main-nav-link" href="/">Home</a>
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://7te9fe.com1.z0.glb.clouddn.com/default_avatar.jpg"/>
+          <div id="homelink">WoodKnot</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
         
-          <a class="main-nav-link" href="/archives">Archives</a>
         
-      </nav>
-      <nav id="sub-nav">
+          
+            <li>
+          
+            <a href="/index.html">Home</a>
+            
+          </li>
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          
+            <li>
+          
+            <a href="/archives">Archives</a>
+            
+          </li>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+          
+            <li>
+          
+            <a href="/tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/about">About</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="https://github.com/stiekel/hexo-theme-random">Github</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
       </div>
     </div>
   </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-高级排序" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/04/11/高级排序/" class="article-date">
-  <time datetime="2018-04-11T05:58:28.000Z" itemprop="datePublished">2018-04-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      高级排序
-    </h1>
-  
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
+  <div id="content-outer">
+    <div id="content-inner">
       
-        <h1 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">package me.woodknot;</span><br><span class="line"></span><br><span class="line">public class ShellSort &#123;</span><br><span class="line"></span><br><span class="line">	public static void sort(long[] arr) &#123;</span><br><span class="line">		int h = 1;</span><br><span class="line"></span><br><span class="line">		while (h &lt; arr.length / 3) &#123;</span><br><span class="line">			h = h * 3 + 1;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		while (h &gt; 0) &#123;</span><br><span class="line">			long tmp = 0;</span><br><span class="line">			for (int i = h; i &lt; arr.length; i++) &#123;</span><br><span class="line">				tmp = arr[i];</span><br><span class="line">				int j = i;</span><br><span class="line">				while (j &gt; h - 1 &amp;&amp; arr[j - h] &gt;= tmp) &#123;</span><br><span class="line">					arr[j] = arr[j - h];</span><br><span class="line">					j -= h;</span><br><span class="line">				&#125;</span><br><span class="line">				arr[j] = tmp;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			h = (h - 1) / 3;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+  <article id="post">
+    <h1>高级排序</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2018-04-11</span>
+      
+        <span id = "post-title-updated">Updated at 2018-04-11</span>
+      
+      
+      
+    </p>
+    
+    <h1 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">package me.woodknot;</span><br><span class="line"></span><br><span class="line">public class ShellSort &#123;</span><br><span class="line"></span><br><span class="line">	public static void sort(long[] arr) &#123;</span><br><span class="line">		int h = 1;</span><br><span class="line"></span><br><span class="line">		while (h &lt; arr.length / 3) &#123;</span><br><span class="line">			h = h * 3 + 1;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		while (h &gt; 0) &#123;</span><br><span class="line">			long tmp = 0;</span><br><span class="line">			for (int i = h; i &lt; arr.length; i++) &#123;</span><br><span class="line">				tmp = arr[i];</span><br><span class="line">				int j = i;</span><br><span class="line">				while (j &gt; h - 1 &amp;&amp; arr[j - h] &gt;= tmp) &#123;</span><br><span class="line">					arr[j] = arr[j - h];</span><br><span class="line">					j -= h;</span><br><span class="line">				&#125;</span><br><span class="line">				arr[j] = tmp;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			h = (h - 1) / 3;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">package me.woodknot;</span><br><span class="line"></span><br><span class="line">public class QuickSort &#123;</span><br><span class="line">	</span><br><span class="line">	public static void quickSort(int[] arr) &#123;</span><br><span class="line">		qsort(arr, 0, arr.length - 1);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private static void qsort(int[] arr, int low, int high) &#123;</span><br><span class="line">		if (low &lt; high) &#123;</span><br><span class="line">			int pivot = partition(arr, low, high); // 将数组分为两部分</span><br><span class="line">			qsort(arr, low, pivot - 1); // 递归排序左子数组</span><br><span class="line">			qsort(arr, pivot + 1, high); // 递归排序右子数组</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private static int partition(int[] arr, int low, int high) &#123;</span><br><span class="line">		int pivot = arr[low]; // 枢轴记录</span><br><span class="line">		while (low &lt; high) &#123;</span><br><span class="line">			while (low &lt; high &amp;&amp; arr[high] &gt;= pivot)</span><br><span class="line">				--high;</span><br><span class="line">			arr[low] = arr[high]; // 交换比枢轴小的记录到左端</span><br><span class="line">			while (low &lt; high &amp;&amp; arr[low] &lt;= pivot)</span><br><span class="line">				++low;</span><br><span class="line">			arr[high] = arr[low]; // 交换比枢轴小的记录到右端</span><br><span class="line">		&#125;</span><br><span class="line">		// 扫描完成，枢轴到位</span><br><span class="line">		arr[low] = pivot;</span><br><span class="line">		// 返回的是枢轴的位置</span><br><span class="line">		return low;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		int[] arr = new int[] &#123; 34, 23, 2, 1, -5, 11,2,  45, 33, 99, 213 &#125;;</span><br><span class="line"></span><br><span class="line">		for (long num : arr) &#123;</span><br><span class="line">			System.out.print(num + &quot; &quot;);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		System.out.println();</span><br><span class="line"></span><br><span class="line">		QuickSort.quickSort(arr);</span><br><span class="line"></span><br><span class="line">		for (long num : arr) &#123;</span><br><span class="line">			System.out.print(num + &quot; &quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/11/高级排序/" data-id="cjh5rqynw000et4uly5rld3qr" class="article-share-link">Share</a>
-      
-      
-    </footer>
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#希尔排序"><span class="toc-text">希尔排序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#快速排序"><span class="toc-text">快速排序</span></a></li></ol>
   </div>
+</div>
+
   
-    
-<nav id="article-nav">
+<nav id="pagination">
   
-    <a href="/2018/04/12/redis/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          redis
-        
-      </div>
-    </a>
+    <a href="/2018/04/12/redis/" class="prev">&larr; Prev post redis</a>
   
+
   
-    <a href="/2018/04/11/简单排序/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">简单排序</div>
-    </a>
+
+  
+    <a href="/2018/04/11/简单排序/" class="next">Next post 简单排序 &rarr;</a>
   
 </nav>
 
-  
-</article>
+  <!-- JiaThis Button BEGIN -->
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
+<!-- JiaThis Button END -->
 
-  
-    
 
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+      
+      
     </div>
   </div>
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2018/04/26/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2018/04/17/nginx-php-fpm/">nginx php-fpm</a>
-          </li>
-        
-          <li>
-            <a href="/2018/04/16/memcache/">memcache</a>
-          </li>
-        
-          <li>
-            <a href="/2018/04/12/redis/">redis</a>
-          </li>
-        
-          <li>
-            <a href="/2018/04/11/高级排序/">高级排序</a>
-          </li>
-        
-      </ul>
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Wood Knot using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
     </div>
   </div>
+</div>
 
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://7te9fe.com1.z0.glb.clouddn.com/default_avatar.jpg">
+    <p id="description">老铁666</p>
+    <ul class="social-icon">
   
-</aside>
+  
+    <li>
+      <a href="https://github.com/stiekel/hexo-theme-random">
         
-      </div>
-      <footer id="footer">
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
   
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2018 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
+    <li>
+      <a href="https://coding.net/u/Stiekel">
+        
+          <i class="icon iconfont coding">&#xe607;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/SidCN">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="http://weibo.com/sidcn">
+        
+          <i class="icon iconfont weibo">&#xe602;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="http://www.douban.com/people/Stiekel/">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+</ul>
   </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+
+
+
   
-    <a href="/" class="mobile-nav-link">Home</a>
   
-    <a href="/archives" class="mobile-nav-link">Archives</a>
+    <script src="/js/jquery-2.2.3.min.js"></script>
   
-</nav>
-    
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+  turnoffBackgroundImage = true;
 
 
-<script src="/js/script.js"></script>
+var backgroundColor = "34495E";
 
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
 
-
-  </div>
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
 </body>
 </html>
+
