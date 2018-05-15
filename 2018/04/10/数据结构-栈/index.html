@@ -131,9 +131,9 @@
   <article id="post">
     <h1>数据结构-栈</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2018-04-10</span>
+      <span id = "post-title-date">撰写于 2018-04-10</span>
       
-        <span id = "post-title-updated">Updated at 2018-04-10</span>
+        <span id = "post-title-updated">修改于 2018-04-10</span>
       
       
       
@@ -144,10 +144,10 @@
 </code></pre><h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">package me.woodknot;</span><br><span class="line"></span><br><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.NoSuchElementException;</span><br><span class="line"></span><br><span class="line">public class Stack&lt;E&gt; &#123;</span><br><span class="line"></span><br><span class="line">	private E[] arr;</span><br><span class="line">	private int n;</span><br><span class="line">	</span><br><span class="line">	public Stack() &#123;</span><br><span class="line">		arr = (E[]) new Object[2];</span><br><span class="line">		n = 0;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public boolean isEmpty() &#123;</span><br><span class="line">		return n == 0;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public int size() &#123;</span><br><span class="line">		return n;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void resize(int capacity) &#123;</span><br><span class="line">		arr = Arrays.copyOf(arr, capacity);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void push(E elem) &#123;</span><br><span class="line">		if(n == arr.length) &#123;</span><br><span class="line">			resize(2 * n);</span><br><span class="line">		&#125;</span><br><span class="line">		arr[n++] = elem;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public E pop() &#123;</span><br><span class="line">		if(isEmpty()) &#123;</span><br><span class="line">			throw new NoSuchElementException(&quot;empty stack&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">		E top = arr[n - 1];</span><br><span class="line">		arr[n - 1] = null;</span><br><span class="line">		n--;</span><br><span class="line">		</span><br><span class="line">		return top;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public E peek() &#123;</span><br><span class="line">		return arr[n - 1];</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void print() &#123;</span><br><span class="line">		for(int i = 0; i &lt; n; i ++) &#123;</span><br><span class="line">			System.out.println(arr[i]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Stack&lt;String&gt; ms = new Stack&lt;String&gt;();</span><br><span class="line">		ms.push(&quot;php&quot;);</span><br><span class="line">		ms.push(&quot;python&quot;);</span><br><span class="line">		ms.push(&quot;java&quot;);</span><br><span class="line">		String f = ms.peek();</span><br><span class="line">//		System.out.println(f);</span><br><span class="line">		ms.print();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
   </article>
   <div class="random-toc-area">
-  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
-  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
   <div class="random-toc">
-    <h2>Table of Content</h2>
+    <h2>目录</h2>
     <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#栈"><span class="toc-text">栈</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#特点"><span class="toc-text">特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基础操作"><span class="toc-text">基础操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码实现"><span class="toc-text">代码实现</span></a></li></ol></li></ol>
   </div>
 </div>
@@ -155,13 +155,13 @@
   
 <nav id="pagination">
   
-    <a href="/2018/04/10/数据结构-二叉搜索树/" class="prev">&larr; Prev post 数据结构-二叉搜索树</a>
+    <a href="/2018/04/10/数据结构-二叉搜索树/" class="prev">&larr; 上一篇 数据结构-二叉搜索树</a>
   
 
   
 
   
-    <a href="/2018/04/10/数据结构-队列/" class="next">Next post 数据结构-队列 &rarr;</a>
+    <a href="/2018/04/10/数据结构-队列/" class="next">下一篇 数据结构-队列 &rarr;</a>
   
 </nav>
 

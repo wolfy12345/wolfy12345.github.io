@@ -129,9 +129,9 @@
   <article id="post">
     <h1>高级排序</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2018-04-11</span>
+      <span id = "post-title-date">撰写于 2018-04-11</span>
       
-        <span id = "post-title-updated">Updated at 2018-04-11</span>
+        <span id = "post-title-updated">修改于 2018-04-11</span>
       
       
       
@@ -141,10 +141,10 @@
 <h1 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">package me.woodknot;</span><br><span class="line"></span><br><span class="line">public class QuickSort &#123;</span><br><span class="line">	</span><br><span class="line">	public static void quickSort(int[] arr) &#123;</span><br><span class="line">		qsort(arr, 0, arr.length - 1);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private static void qsort(int[] arr, int low, int high) &#123;</span><br><span class="line">		if (low &lt; high) &#123;</span><br><span class="line">			int pivot = partition(arr, low, high); // 将数组分为两部分</span><br><span class="line">			qsort(arr, low, pivot - 1); // 递归排序左子数组</span><br><span class="line">			qsort(arr, pivot + 1, high); // 递归排序右子数组</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private static int partition(int[] arr, int low, int high) &#123;</span><br><span class="line">		int pivot = arr[low]; // 枢轴记录</span><br><span class="line">		while (low &lt; high) &#123;</span><br><span class="line">			while (low &lt; high &amp;&amp; arr[high] &gt;= pivot)</span><br><span class="line">				--high;</span><br><span class="line">			arr[low] = arr[high]; // 交换比枢轴小的记录到左端</span><br><span class="line">			while (low &lt; high &amp;&amp; arr[low] &lt;= pivot)</span><br><span class="line">				++low;</span><br><span class="line">			arr[high] = arr[low]; // 交换比枢轴小的记录到右端</span><br><span class="line">		&#125;</span><br><span class="line">		// 扫描完成，枢轴到位</span><br><span class="line">		arr[low] = pivot;</span><br><span class="line">		// 返回的是枢轴的位置</span><br><span class="line">		return low;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		int[] arr = new int[] &#123; 34, 23, 2, 1, -5, 11,2,  45, 33, 99, 213 &#125;;</span><br><span class="line"></span><br><span class="line">		for (long num : arr) &#123;</span><br><span class="line">			System.out.print(num + &quot; &quot;);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		System.out.println();</span><br><span class="line"></span><br><span class="line">		QuickSort.quickSort(arr);</span><br><span class="line"></span><br><span class="line">		for (long num : arr) &#123;</span><br><span class="line">			System.out.print(num + &quot; &quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
   </article>
   <div class="random-toc-area">
-  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
-  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
   <div class="random-toc">
-    <h2>Table of Content</h2>
+    <h2>目录</h2>
     <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#希尔排序"><span class="toc-text">希尔排序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#快速排序"><span class="toc-text">快速排序</span></a></li></ol>
   </div>
 </div>
@@ -152,13 +152,13 @@
   
 <nav id="pagination">
   
-    <a href="/2018/04/12/redis/" class="prev">&larr; Prev post redis</a>
+    <a href="/2018/04/12/redis/" class="prev">&larr; 上一篇 redis</a>
   
 
   
 
   
-    <a href="/2018/04/11/简单排序/" class="next">Next post 简单排序 &rarr;</a>
+    <a href="/2018/04/11/简单排序/" class="next">下一篇 简单排序 &rarr;</a>
   
 </nav>
 
