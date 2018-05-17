@@ -129,9 +129,9 @@
   <article id="post">
     <h1>redis</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">撰写于 2018-04-12</span>
+      <span id = "post-title-date">Created at 2018-04-12</span>
       
-        <span id = "post-title-updated">修改于 2018-05-15</span>
+        <span id = "post-title-updated">Updated at 2018-05-15</span>
       
       
       
@@ -234,10 +234,10 @@
 <h2 id="未完待续……"><a href="#未完待续……" class="headerlink" title="未完待续……"></a>未完待续……</h2>
   </article>
   <div class="random-toc-area">
-  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
-  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
   <div class="random-toc">
-    <h2>目录</h2>
+    <h2>Table of Content</h2>
     <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis"><span class="toc-text">Redis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本数据类型"><span class="toc-text">基本数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5种type"><span class="toc-text">5种type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8种encoding"><span class="toc-text">8种encoding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-text">实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pub-Sub"><span class="toc-text">Pub/Sub</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LRU策略"><span class="toc-text">LRU策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事务"><span class="toc-text">事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相关命令"><span class="toc-text">相关命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用逻辑"><span class="toc-text">使用逻辑</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主从复制"><span class="toc-text">主从复制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原理"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启从服务器"><span class="toc-text">开启从服务器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#持久化"><span class="toc-text">持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RDB"><span class="toc-text">RDB</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#原理-1"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#优点"><span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点"><span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AOF"><span class="toc-text">AOF</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#原理-2"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#优点-1"><span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点-1"><span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选择策略"><span class="toc-text">选择策略</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#哨兵Sentinel"><span class="toc-text">哨兵Sentinel</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#职责（保证高可用）"><span class="toc-text">职责（保证高可用）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集群Cluster"><span class="toc-text">集群Cluster</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#重新分片"><span class="toc-text">重新分片</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题"><span class="toc-text">问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#未完待续……"><span class="toc-text">未完待续……</span></a></li></ol></li></ol>
   </div>
 </div>
@@ -245,13 +245,13 @@
   
 <nav id="pagination">
   
-    <a href="/2018/04/16/memcache/" class="prev">&larr; 上一篇 memcache</a>
+    <a href="/2018/04/16/memcache/" class="prev">&larr; Prev post memcache</a>
   
 
   
 
   
-    <a href="/2018/04/11/高级排序/" class="next">下一篇 高级排序 &rarr;</a>
+    <a href="/2018/04/11/高级排序/" class="next">Next post 高级排序 &rarr;</a>
   
 </nav>
 
